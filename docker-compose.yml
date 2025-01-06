@@ -1,0 +1,69 @@
+
+services:
+  midia:
+    image: tenzerlab/midiaid:latest
+    hostname: midia_docker
+    volumes:
+      - "./snakemake:/midia/midia_experiments/midia_workspace/midia_pipe/.snakemake"
+      - "./spectra:/midia/midia_experiments/midia_workspace/midia_pipe/spectra"
+      - "./configs:/midia/midia_experiments/midia_workspace/midia_pipe/configs"
+      - "./P:/midia/midia_experiments/midia_workspace/midia_pipe/P"
+      - "./partial:/midia/midia_experiments/midia_workspace/midia_pipe/partial"
+      - "./outputs:/midia/midia_experiments/midia_workspace/midia_pipe/outputs"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro"
+      - "./fastas:/midia/midia_experiments/midia_workspace/midia_pipe/fastas"
+    environment:
+      - HOME=/midia
+#      - DISPLAY=${DISPLAY}
+
+
+  midia_local_build:
+    image: midia
+    hostname: midia_docker
+    volumes:
+      - "./snakemake:/midia/midia_experiments/midia_workspace/midia_pipe/.snakemake"
+      - "./spectra:/midia/midia_experiments/midia_workspace/midia_pipe/spectra"
+      - "./configs:/midia/midia_experiments/midia_workspace/midia_pipe/configs"
+      - "./P:/midia/midia_experiments/midia_workspace/midia_pipe/P"
+      - "./partial:/midia/midia_experiments/midia_workspace/midia_pipe/partial"
+      - "./outputs:/midia/midia_experiments/midia_workspace/midia_pipe/outputs"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro"
+      - "./fastas:/midia/midia_experiments/midia_workspace/midia_pipe/fastas"
+    environment:
+      - HOME=/midia
+#      - DISPLAY=${DISPLAY}
+
+  midiaIDopen:
+    image: midia_open
+    hostname: midia_docker
+    volumes:
+      - "./snakemake:/midia/midia_experiments/midia_workspace/midia_pipe/.snakemake"
+      - "./spectra:/midia/midia_experiments/midia_workspace/midia_pipe/spectra"
+      - "./configs:/midia/midia_experiments/midia_workspace/midia_pipe/configs"
+      - "./P:/midia/midia_experiments/midia_workspace/midia_pipe/P"
+      - "./partial:/midia/midia_experiments/midia_workspace/midia_pipe/partial"
+      - "./outputs:/midia/midia_experiments/midia_workspace/midia_pipe/outputs"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro"
+      - "./fastas:/midia/midia_experiments/midia_workspace/midia_pipe/fastas"
+      - "./tims:/midia/midia_experiments/midia_workspace/midia_pipe/software/tims"
+    environment:
+      - HOME=/midia
+#      - DISPLAY=${DISPLAY}
+
+
+  midia_dev:
+    image: midia_dev
+    hostname: midia_docker
+    volumes:
+      - "./midia_dev:/midia_dev"
+      - "/etc/passwd:/etc/passwd:ro"
+      - "/etc/group:/etc/group:ro"
+    environment:
+      - HOME=/midia_dev
+#      - DISPLAY=${DISPLAY}
+
+
+
