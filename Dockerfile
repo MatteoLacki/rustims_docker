@@ -1,4 +1,4 @@
-FROM ubuntu:jammy AS rustims
+FROM ubuntu:jammy AS base
 WORKDIR /rustims
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y software-properties-common
@@ -17,7 +17,7 @@ RUN echo $CACHE_BUST
 
 RUN cd /rustims && python3.11 -m venv ve && /rustims/ve/bin/pip install imspy ipython notebook matplotlib jupyterlab && \
 	mkdir /rustims/inputs
-#RUN chmod a+wrx -R /rustims
+
+FROM scratch as rustims
+COPY --from=base / /
 ENTRYPOINT ["sh", "-c", ". /rustims/ve/bin/activate && exec \"$@\"", "--"] 
-
-
