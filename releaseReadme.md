@@ -22,6 +22,8 @@ To run jupyterlab, go for:
 This will allow you to run an interactive jupyterlab session in your browser, available under `http://localhost:8888`
 The secret token will be shown in the output of jupyterlab.
 It can work remotely, so replace simply `localhost` with your server's ip.
+To save the state of the notebook, simply save it in the folder `/rustims/inputs/<whatever_you_want_here>` as seen from inside the container.
+
 
 To run `imspy_dda`, go for:
 

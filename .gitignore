@@ -1,4 +1,4 @@
 inputs
 image
 *.swp
-release
+release/*
