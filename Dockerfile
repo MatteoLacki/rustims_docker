@@ -18,6 +18,7 @@ RUN echo $CACHE_BUST
 RUN cd /rustims && python3.11 -m venv ve && /rustims/ve/bin/pip install imspy ipython notebook matplotlib jupyterlab && \
 	mkdir /rustims/inputs
 
+# This here is a bit stupid, but we could remove some stuff here.
 FROM scratch as rustims
-COPY --from=base /rustims /rustims
+COPY --from=base / /
 ENTRYPOINT ["sh", "-c", ". /rustims/ve/bin/activate && exec \"$@\"", "--"] 
