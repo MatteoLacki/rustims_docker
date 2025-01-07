@@ -1,5 +1,4 @@
 FROM ubuntu:jammy AS rustims
-
 WORKDIR /rustims
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y software-properties-common
@@ -14,9 +13,11 @@ RUN groupadd -g $GID rustgroup && useradd -m -u $UID -g $GID rusto
 USER rusto
 
 ARG CACHE_BUST=1
-RUN echo "Cache busting: $CACHE_BUST"
+RUN echo $CACHE_BUST
 
 RUN cd /rustims && python3.11 -m venv ve && /rustims/ve/bin/pip install imspy ipython notebook matplotlib jupyterlab && \
 	mkdir /rustims/inputs
 #RUN chmod a+wrx -R /rustims
 ENTRYPOINT ["sh", "-c", ". /rustims/ve/bin/activate && exec \"$@\"", "--"] 
+
+
