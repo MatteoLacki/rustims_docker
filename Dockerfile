@@ -19,5 +19,5 @@ RUN cd /rustims && python3.11 -m venv ve && /rustims/ve/bin/pip install imspy ip
 	mkdir /rustims/inputs
 
 FROM scratch as rustims
-COPY --from=base / /
+COPY --from=base /rustims /rustims
 ENTRYPOINT ["sh", "-c", ". /rustims/ve/bin/activate && exec \"$@\"", "--"] 
