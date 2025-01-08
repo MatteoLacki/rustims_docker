@@ -9,7 +9,7 @@ nobustimage: Dockerfile
 	touch image
 
 arm64image: Dockerfile
-	docker buildx create --name rustimsbuilder --use
+	@docker buildx ls | grep -q rustimsbuilder || docker buildx create --name rustimsbuilder --use
 	docker buildx build --platform linux/arm64 --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) --load .
 	touch arm64image
 
