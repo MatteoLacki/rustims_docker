@@ -1,16 +1,15 @@
 all: image
 
 image: Dockerfile
-	docker build --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) .
+	docker build --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) --progress=plain .
 	touch image
 
-nobustimage: Dockerfile
-	docker build --tag rustims --target rustims .
+nobustimage: Dockerfile.amd64
+	docker build --file Dockerfile.amd64 --tag rustims --target rustims .
 	touch image
 
-arm64image: Dockerfile
-	@docker buildx ls | grep -q rustimsbuilder || docker buildx create --name rustimsbuilder --use
-	docker buildx build --platform linux/arm64 --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) --load .
+arm64image: Dockerfile.arm64
+	docker buildx build --file Dockerfile.arm64 --platform linux/arm64 --tag matteolacki/rustims_arm64:latest --target rustims --build-arg CACHE_BUST=$$(date +%s) --progress=plain --load .
 	touch arm64image
 
 release: install jupyterlab docker-compose.yml imspy_dda releaseReadme.md
