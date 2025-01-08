@@ -22,29 +22,34 @@ ARG GID=1000
 RUN groupadd -g $GID rustgroup && useradd -m -u $UID -g $GID rusto
 USER rusto
 
-ARG CACHE_BUST=1
-RUN echo $CACHE_BUST
 
 RUN cd /rustims && \
 	python3.11 -m venv ve && \
 	/rustims/ve/bin/pip install maturin ipython notebook matplotlib jupyterlab && \
 	mkdir /rustims/inputs
 
+RUN /rustims/ve/bin/python --version && sleep 2
+
 RUN cd /rustims && \
 	git clone https://github.com/theGreatHerrLebert/rustims.git && \
 	git clone https://github.com/theGreatHerrLebert/sagepy.git
 
-RUN cd /rustims/rustims/imspy_connector &&\
-	/rustims/ve/bin/maturin build --release && \
-	/rustims/ve/bin/pip install ../target/wheels/imspy_connector-*
+# TODO: move it back up
+ARG CACHE_BUST=1
+RUN echo $CACHE_BUST
 
-RUN cd /rustims/sagepy/sagepy-connector && \
-	/rustims/ve/bin/maturin build --release && \
-	/rustims/ve/bin/pip install target/wheels/sagepy_connector-*
 
-RUN /rustims/ve/bin/pip install imspy
+# RUN cd /rustims/rustims/imspy_connector &&\
+# 	/rustims/ve/bin/maturin build --release && \
+# 	/rustims/ve/bin/pip install ../target/wheels/imspy_connector-*
 
-# This here is a bit stupid as is, cause all from base is copied instead only final binaries, but we can optimize it LATER.
+# RUN cd /rustims/sagepy/sagepy-connector && \
+# 	/rustims/ve/bin/maturin build --release && \
+# 	/rustims/ve/bin/pip install target/wheels/sagepy_connector-*
+
+# RUN /rustims/ve/bin/pip install imspy
+
+# # This here is a bit stupid as is, cause all from base is copied instead only final binaries, but we can optimize it LATER.
 FROM scratch as rustims
 COPY --from=base / /
 ENTRYPOINT ["sh", "-c", ". /rustims/ve/bin/activate && exec \"$@\"", "--"] 

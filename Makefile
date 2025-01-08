@@ -9,7 +9,7 @@ nobustimage: Dockerfile
 	touch image
 
 arm64image: Dockerfile
-	docker buildx build --platform linux/arm64 --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) .
+	docker buildx build --platform linux/arm64 --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) --load .
 	touch arm64image
 
 release: install jupyterlab docker-compose.yml imspy_dda releaseReadme.md
