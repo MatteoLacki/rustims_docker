@@ -1,10 +1,17 @@
 FROM ubuntu:jammy AS base
-WORKDIR /rustims
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y software-properties-common
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends software-properties-common \
+	curl vim tree ranger wget build-essential ca-certificates && \
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+	rustup update && \
+    	apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN rustc --version && cargo --version
+
+WORKDIR /rustims
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y git gcc gdb python3.11 python3-pip \
-           python-is-python3 python3-dev python3.11-dev wget curl vim tree ranger python3.11-venv
+           python-is-python3 python3-dev python3.11-dev python3.11-venv
 
 RUN chmod a+wrx -R /rustims
 ARG UID=1000
