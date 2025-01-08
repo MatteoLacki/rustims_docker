@@ -39,11 +39,11 @@ git clone https://github.com/theGreatHerrLebert/rustims.git && \
 git clone https://github.com/theGreatHerrLebert/sagepy.git
 
 RUN cd /rustims/rustims/imspy_connector && \
-/rustims/.venv/bin/maturin build --interpreter /usr/bin/python3.11 --release && \
+/rustims/.venv/bin/maturin build --interpreter /usr/bin/python3.11 --release -vvv && \
 /rustims/.venv/bin/pip install ../target/wheels/imspy_connector-*-cp311-cp311-manylinux_2_34_aarch64.whl
 
 RUN cd /rustims/sagepy/sagepy-connector && \
-/rustims/.venv/bin/maturin build --interpreter /usr/bin/python3.11 --release && \
+/rustims/.venv/bin/maturin build --interpreter /usr/bin/python3.11 --release -vvv && \
 /rustims/.venv/bin/pip install target/wheels/sagepy_connector-*-cp311-cp311-manylinux_2_34_aarch64.whl
 
 RUN /rustims/.venv/bin/pip install imspy
