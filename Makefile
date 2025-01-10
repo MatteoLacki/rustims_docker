@@ -4,6 +4,10 @@ image: Dockerfile
 	docker build --tag rustims --target rustims --build-arg CACHE_BUST=$$(date +%s) --progress=plain .
 	touch image
 
+native_arm64_image: Dockerfile.arm64
+	docker build --file Dockerfile.arm64 --tag matteolacki/rustims_arm64:latest --target rustims --build-arg CACHE_BUST=$$(date +%s) --progress=plain .
+	touch native_arm64_image
+
 nobustimage: Dockerfile.amd64
 	docker build --file Dockerfile.amd64 --tag rustims --target rustims .
 	touch image

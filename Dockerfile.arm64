@@ -21,9 +21,8 @@ RUN cd /rustims && python3.11 -m venv .venv
 
 
 # TODO: move it back up
-# ARG CACHE_BUST=1
-# RUN echo $CACHE_BUST
-# RUN apt-get install -y --no-install-recommends rustc cargo
+ARG CACHE_BUST=1
+RUN echo $CACHE_BUST
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y 
 ENV PATH="/home/rusto/.cargo/bin:${PATH}"
 
@@ -48,7 +47,8 @@ RUN cd /rustims/sagepy/sagepy-connector && \
 RUN ls -lah /rustims/sagepy/sagepy-connector
 RUN /rustims/.venv/bin/pip install /rustims/sagepy/sagepy-connector/target/wheels/sagepy_connector-*-cp311-cp311-manylinux_2_34_aarch64.whl
 
-RUN /rustims/.venv/bin/pip install imspy
+#RUN /rustims/.venv/bin/pip install imspy
+RUN /rustims/.venv/bin/pip install /rustims/rustims/imspy
 
 # # This here is a bit stupid as is, cause all from base is copied instead only final binaries, but we can optimize it LATER.
 FROM scratch as rustims
