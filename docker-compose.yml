@@ -1,21 +1,8 @@
 
 services:
 
-  rustims:
-    image: rustims
-    hostname: rustims_docker
-    volumes:
-      - "./inputs:/rustims/inputs"
-    environment:
-      - HOME=/rustims
-      - JUPYTER_ENABLE_LAB=yes
-    ports:
-      - "8888:8888"
-
-
-  
   rustimsarm64:
-    image: rustimsarm64
+    image: rustims
     hostname: rustims_docker
     volumes:
       - "./inputs:/rustims/inputs"
