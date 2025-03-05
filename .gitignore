@@ -2,3 +2,4 @@ inputs
 *image*
 *.swp
 release/*
+release_arm64/*

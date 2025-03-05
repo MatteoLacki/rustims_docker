@@ -24,5 +24,17 @@ release: install jupyterlab docker-compose.yml imspy_dda releaseReadme.md
 	cp install docker-compose.yml jupyterlab imspy_dda release
 	cp releaseReadme.md release/readme.md
 
+release_arm64: install_arm64 jupyterlab_arm64 docker-compose.yml imspy_dda_arm64 releaseReadme.md
+	mkdir -p release_arm64/inputs
+	cp jupyterlab_arm64 release_arm64/jupyterlab
+	cp install_arm64 release_arm64/install
+	cp imspy_dda_arm64 release_arm64/imspy_dda
+	cp docker-compose.yml release_arm64
+	cp releaseReadme.md release_arm64/readme.md
+
 release.zip: release
 	zip -r release.zip release
+
+release_arm64.zip: release_arm64
+	zip -r release_arm64.zip release_arm64
+
