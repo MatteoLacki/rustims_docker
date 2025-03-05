@@ -1,0 +1,1 @@
+docker pull matteolacki/rustims_arm64:latest

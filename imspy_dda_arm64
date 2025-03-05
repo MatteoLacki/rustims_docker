@@ -1,0 +1,1 @@
+docker compose run -u $(id -u):$(id -g) --rm rustimshub_arm64 imspy_dda $@ 

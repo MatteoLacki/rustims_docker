@@ -1,0 +1,1 @@
+docker compose run -u $(id -u):$(id -g) --service-ports --rm rustimshub_arm64 jupyter lab --ip 0.0.0.0

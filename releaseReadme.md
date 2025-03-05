@@ -3,6 +3,7 @@
 You must have a working Docker instance.
 Get the `release.zip` and perform:
 
+Warning: On MacOS running non Intel-based chips, always append `_arm64` to all the commands such as install_arm64, imspy_dda_arm64 etc.
 ```
 unzip release.zip
 cd release
