@@ -19,9 +19,10 @@ arm64image: Dockerfile.arm64
 	docker buildx build --file Dockerfile.arm64 --platform linux/arm64 --tag matteolacki/rustims_arm64:latest $(DOCKERFLAGS) --load .
 	touch arm64image
 
-release: install jupyterlab docker-compose.yml imspy_dda releaseReadme.md
+release: install jupyterlab docker-compose.yml imspy_dda releaseReadme.md timsim_configs
 	mkdir -p release/inputs
-	cp install docker-compose.yml jupyterlab imspy_dda release
+	cp install docker-compose.yml jupyterlab imspy_dda timsim release
+	cp -r timsim_configs release/inputs
 	cp releaseReadme.md release/readme.md
 
 release_arm64: install_arm64 jupyterlab_arm64 docker-compose.yml imspy_dda_arm64 releaseReadme.md
@@ -31,6 +32,7 @@ release_arm64: install_arm64 jupyterlab_arm64 docker-compose.yml imspy_dda_arm64
 	cp imspy_dda_arm64 release_arm64/imspy_dda
 	cp docker-compose.yml release_arm64
 	cp releaseReadme.md release_arm64/readme.md
+	cp -r timsim_configs release/inputs
 
 release.zip: release
 	zip -r release.zip release

@@ -12,8 +12,7 @@ Warning, on ARM64 MacOS, unzip `release_arm64.zip`
 
 This step needs to be repeated only whenever you want a new image (and there is one new on dockerhub).
 
-## Running 
-
+## Running JupyterLab to perform free coding
 To run jupyterlab, go for:
 
 ```
@@ -25,6 +24,8 @@ The secret token will be shown in the output of jupyterlab.
 It can work remotely, so replace simply `localhost` with your server's ip.
 To save the state of the notebook, simply save it in the folder `/rustims/inputs/<whatever_you_want_here>` as seen from inside the container.
 
+
+## Running SAGEPY DDA 
 
 To run `imspy_dda`, go for:
 
@@ -49,3 +50,15 @@ Then, run `./imspy_dda inputs/test inputs/test/some.fasta inputs/test --config i
 For other options, run help with `./impspy --help`.
 
 We wish you happy searching and finding whatever you really really want.
+
+## Simulating timsTOF raw data
+
+To simulate raw data run:
+
+```
+./timsim --config inputs/<path_to_your_config_can_be_subfolder_too>.toml
+```
+
+Example configs are distributed under `inputs/timsim_configs/*.toml`. 
+
+

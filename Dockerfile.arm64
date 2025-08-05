@@ -51,7 +51,7 @@ RUN /rustims/.venv/bin/pip install /rustims/sagepy/sagepy-connector/target/wheel
 RUN /rustims/.venv/bin/pip install /rustims/rustims/imspy
 
 # # This here is a bit stupid as is, cause all from base is copied instead only final binaries, but we can optimize it LATER.
-FROM scratch as rustims
+FROM scratch AS rustims
 COPY --from=base / /
 ENTRYPOINT ["sh", "-c", ". /rustims/.venv/bin/activate && exec \"$@\"", "--"] 
 WORKDIR /rustims
