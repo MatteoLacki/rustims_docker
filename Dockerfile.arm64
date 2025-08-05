@@ -1,3 +1,12 @@
+
+2:37 PM
+
+
+
+
+
+
+
 FROM ubuntu:jammy AS base
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC  \
@@ -38,6 +47,11 @@ RUN cd /rustims && \
 git clone https://github.com/theGreatHerrLebert/rustims.git && \
 git clone https://github.com/theGreatHerrLebert/sagepy.git
 
+# Dirty hack: Remove GUI dependencies from pyproject.toml
+RUN sed -i.bak '/pyqt5/d' /rustims/rustims/imspy/pyproject.toml && \
+    sed -i.bak '/qdarkstyle/d' /rustims/rustims/imspy/pyproject.toml && \
+    sed -i.bak '/vtk/d' /rustims/rustims/imspy/pyproject.toml
+
 RUN cd /rustims/rustims/imspy_connector && \
 /rustims/.venv/bin/maturin build --interpreter /usr/bin/python3.11 --release --target aarch64-unknown-linux-gnu
 RUN /rustims/.venv/bin/pip install /rustims/rustims/target/wheels/imspy_connector-*-cp311-cp311-manylinux_2_34_aarch64.whl
@@ -47,7 +61,6 @@ RUN cd /rustims/sagepy/sagepy-connector && \
 RUN ls -lah /rustims/sagepy/sagepy-connector
 RUN /rustims/.venv/bin/pip install /rustims/sagepy/sagepy-connector/target/wheels/sagepy_connector-*-cp311-cp311-manylinux_2_34_aarch64.whl
 
-#RUN /rustims/.venv/bin/pip install imspy
 RUN /rustims/.venv/bin/pip install /rustims/rustims/imspy
 
 # # This here is a bit stupid as is, cause all from base is copied instead only final binaries, but we can optimize it LATER.

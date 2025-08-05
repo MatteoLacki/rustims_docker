@@ -33,11 +33,10 @@ release_arm64: install_arm64 jupyterlab_arm64 docker-compose.yml imspy_dda_arm64
 	cp imspy_dda_arm64 release_arm64/imspy_dda
 	cp docker-compose.yml release_arm64
 	cp releaseReadme.md release_arm64/readme.md
-	cp -r timsim_configs release/inputs
+	cp -r timsim_configs release_arm64/inputs
 
 release.zip: release
 	zip -r release.zip release
 
 release_arm64.zip: release_arm64
 	zip -r release_arm64.zip release_arm64
-
